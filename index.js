@@ -1,47 +1,55 @@
 module.exports = commonformFixStrings
 
-function isString(argument) {
-  return typeof argument === 'string' }
-
-function combineContiguousSpaces(string) {
-  return string.replace(/\s+/g, ' ') }
-
-function combineContiguousStrings(form) {
-  return {
-    content: form.content.reduce(
-      function(result, element, index) {
-        if (isString(element) && index > 0) {
-          var lastIndex = ( result.length - 1 )
-          var lastElement = result[lastIndex]
-          if (isString(lastElement)) {
-            result[lastIndex] = combineContiguousSpaces(lastElement + element)
-            return result }
-          else {
-            return result.concat(element) } }
-        else {
-          return result.concat(element) } },
-      [ ]) } }
-
-function removeLeadingSpace(form) {
-  var firstElement = form.content[0]
-  if (isString(firstElement)) {
-    form.content[0] = firstElement.replace(/^\s+/, '') }
-  return form }
-
-function removeTrailingSpace(form) {
-  var lastIndex = form.content.length - 1
-  var lastElement = form.content[lastIndex]
-  if (isString(lastElement)) {
-    form.content[lastIndex] = lastElement.replace(/\s+$/, '') }
-  return form }
-
 var mutators = [
-  combineContiguousStrings,
-  removeLeadingSpace,
-  removeTrailingSpace ]
+  function combineContiguousStrings(form) {
+    form.content = form.content.reduce(
+      function(result, element, index) {
+        if (typeof element === 'string' && index > 0) {
+          var lastIndex = result.length - 1
+          var lastElement = result[lastIndex]
+          if (typeof lastElement === 'string') {
+            result[lastIndex] = lastElement + element
+            return result }
+          else { return result.concat(element) } }
+        else { return result.concat(element) } },
+      [ ]) },
+
+  function combineContiguousSpaces(form) {
+    form.content = form.content.map(function(element) {
+      return (
+        typeof element === 'string' ?
+          element.replace(/\s+/g, ' ') :
+          element ) }) },
+
+  function removeLeadingSpace(form) {
+    var firstElement = form.content[0]
+    if (typeof firstElement === 'string') {
+      form.content[0] = firstElement.replace(/^\s+/, '') } },
+
+  function removeTrailingSpace(form) {
+    var lastIndex = form.content.length - 1
+    var lastElement = form.content[lastIndex]
+    if (typeof lastElement === 'string') {
+      form.content[lastIndex] = lastElement.replace(/\s+$/, '') } },
+
+  function removeSpaceAroundChildren(form) {
+    form.content = form.content.reduce(
+      function(content, element) {
+        if (content.length < 1) {
+          content.push(element)
+          return content }
+        else {
+          var lastIndex = content.length - 1
+          var last = content[lastIndex]
+          if (typeof element === 'string' && last.hasOwnProperty('form')) {
+            content.push(element.replace(/^\s+/, ''))
+            return content }
+          else if (element.hasOwnProperty('form') && typeof last === 'string') {
+            content[lastIndex] = last.replace(/\s+$/, '')
+            content.push(element)
+            return content } } },
+      [ ]) } ]
 
 function commonformFixStrings(form) {
-  return mutators.reduce(
-    function(result, mutator) {
-      return mutator(result) },
-    form) }
+  mutators.forEach(function(mutator) { mutator(form) })
+  return form }
