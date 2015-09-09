@@ -47,6 +47,9 @@ var mutators = [
           else if (element.hasOwnProperty('form') && typeof last === 'string') {
             content[lastIndex] = last.replace(/\s+$/, '')
             content.push(element)
+            return content }
+          else {
+            content.push(element)
             return content } } },
       [ ]) } ]
 

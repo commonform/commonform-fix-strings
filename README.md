@@ -67,3 +67,18 @@ assert.deepEqual(
   fixStrings({ conspicuous: 'yes', content: [ 'A' ] }),
   { conspicuous: 'yes', content: [ 'A' ] })
 ```
+
+Valid forms pass right through:
+
+```javascript
+assert.deepEqual(
+  fixStrings({
+    content: [
+      'A',
+      { form: { content: [ 'B' ] } },
+      'C' ] }),
+  { content: [
+      'A',
+      { form: { content: [ 'B' ] } },
+      'C' ] })
+```
