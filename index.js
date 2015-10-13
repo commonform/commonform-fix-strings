@@ -1,5 +1,7 @@
 module.exports = commonformFixStrings
 
+var child = require('commonform-predicate').child
+
 var mutators = [
   function combineContiguousStrings(form) {
     form.content = form.content.reduce(
@@ -19,18 +21,33 @@ var mutators = [
       return (
         typeof element === 'string' ?
           element.replace(/\s+/g, ' ') :
-          element ) }) },
+          element ) })
+    form.content
+      .filter(function(element) {
+        return ( child(element) && ( 'heading' in element ) ) })
+      .forEach(function(child) {
+        child.heading = child.heading.replace(/\s+/g, ' ') }) },
 
   function removeLeadingSpace(form) {
     var firstElement = form.content[0]
     if (typeof firstElement === 'string') {
-      form.content[0] = firstElement.replace(/^\s+/, '') } },
+      form.content[0] = firstElement.replace(/^\s+/, '') }
+    form.content
+      .filter(function(element) {
+        return ( child(element) && ( 'heading' in element ) ) })
+      .forEach(function(child) {
+        child.heading = child.heading.replace(/^\s+/, '') }) },
 
   function removeTrailingSpace(form) {
     var lastIndex = form.content.length - 1
     var lastElement = form.content[lastIndex]
     if (typeof lastElement === 'string') {
-      form.content[lastIndex] = lastElement.replace(/\s+$/, '') } },
+      form.content[lastIndex] = lastElement.replace(/\s+$/, '') }
+    form.content
+      .filter(function(element) {
+        return ( child(element) && ( 'heading' in element ) ) })
+      .forEach(function(child) {
+        child.heading = child.heading.replace(/\s+$/, '') }) },
 
   function removeSpaceAroundChildren(form) {
     form.content = form.content.reduce(

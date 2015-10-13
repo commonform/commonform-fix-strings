@@ -11,5 +11,8 @@
   },
   "scripts": {
     "test": "defence README.md | replace-require-self | node"
+  },
+  "dependencies": {
+    "commonform-predicate": "^0.4.3"
   }
 }
