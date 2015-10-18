@@ -3,6 +3,14 @@ module.exports = commonformFixStrings
 var child = require('commonform-predicate').child
 
 var mutators = [
+  function removeEmptyHeaings(form) {
+    form.content.forEach(function(element) {
+      var emptyHeading = (
+        element.hasOwnProperty('heading') &&
+        /^\s*$/.test(element.heading) )
+      if (emptyHeading) {
+        delete element.heading } }) },
+
   function combineContiguousStrings(form) {
     form.content = form.content.reduce(
       function(result, element, index) {

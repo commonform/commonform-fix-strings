@@ -57,6 +57,18 @@ assert.deepEqual(
         form: { content: [ 'C' ] } } ] })
 ```
 
+Remove empty headings:
+
+```javascript
+assert.deepEqual(
+  fixStrings({
+    content: [
+      { heading: '  ',
+        form: { content: [ 'C' ] } } ] }),
+  { content: [
+      { form: { content: [ 'C' ] } } ] })
+```
+
 Removes space leading a child form:
 
 ```javascript
