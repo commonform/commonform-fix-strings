@@ -39,7 +39,10 @@ var mutators = [
   function removeLeadingSpace(form) {
     var firstElement = form.content[0]
     if (typeof firstElement === 'string') {
-      form.content[0] = firstElement.replace(/^\s+/, '') }
+      if (/^\s*$/.test(firstElement)) {
+        form.content.splice(0, 1) }
+      else {
+        form.content[0] = firstElement.replace(/^\s+/, '') } }
     form.content
       .filter(function(element) {
         return ( child(element) && ( 'heading' in element ) ) })
@@ -50,7 +53,10 @@ var mutators = [
     var lastIndex = form.content.length - 1
     var lastElement = form.content[lastIndex]
     if (typeof lastElement === 'string') {
-      form.content[lastIndex] = lastElement.replace(/\s+$/, '') }
+      if (/^\s*$/.test(lastElement)) {
+        form.content.splice(( form.content.length - 1 ), 1) }
+      else {
+        form.content[lastIndex] = lastElement.replace(/\s+$/, '') } }
     form.content
       .filter(function(element) {
         return ( child(element) && ( 'heading' in element ) ) })

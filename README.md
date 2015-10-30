@@ -26,6 +26,10 @@ Removes leading whitespace:
 assert.deepEqual(
   fixStrings({ content: [ ' A' ] }),
   { content: [ 'A' ] })
+
+assert.deepEqual(
+  fixStrings({ content: [ ' ', { definition: 'A' } ] }),
+  { content: [ { definition: 'A' } ] })
 ```
 
 Removes trailing whitespace:
@@ -34,6 +38,10 @@ Removes trailing whitespace:
 assert.deepEqual(
   fixStrings({ content: [ 'A ' ] }),
   { content: [ 'A' ] })
+
+assert.deepEqual(
+  fixStrings({ content: [ { definition: 'A' }, ' ' ] }),
+  { content: [ { definition: 'A' } ] })
 ```
 
 Removes both:
