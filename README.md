@@ -77,6 +77,26 @@ assert.deepEqual(
       { form: { content: [ 'C' ] } } ] })
 ```
 
+Replaces common non-ASCII characters with ASCII equivalents:
+
+```javascript
+assert.deepEqual(
+  fixStrings({ content: [ 'String “with quotes”.' ] }),
+  { content: [ 'String "with quotes".' ] })
+
+assert.deepEqual(
+  fixStrings({ content: [ 'Has — em dash' ] }),
+  { content: [ 'Has --- em dash' ] })
+```
+
+Removes other non-ASCII characters:
+
+```javascript
+assert.deepEqual(
+  fixStrings({ content: [ 'See §10' ] }),
+  { content: [ 'See 10' ] })
+```
+
 Removes space leading a child form:
 
 ```javascript

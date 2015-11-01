@@ -1,8 +1,17 @@
 module.exports = commonformFixStrings
 
 var child = require('commonform-predicate').child
+var removeNonASCII = require('./remove-non-ascii')
+var replaceUnicode = require('./replace-unicode')
 
 var mutators = [
+  function fixUnicode(form) {
+    form.content.forEach(function(element, index) {
+      if (typeof element === 'string') {
+        form.content[index] = (
+          removeNonASCII(
+            replaceUnicode(element)) ) } }) },
+
   function removeEmptyHeaings(form) {
     form.content.forEach(function(element) {
       var emptyHeading = (
