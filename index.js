@@ -12,7 +12,7 @@ var mutators = [
           removeNonASCII(
             replaceUnicode(element)) ) } }) },
 
-  function removeEmptyHeaings(form) {
+  function removeEmptyHeadings(form) {
     form.content.forEach(function(element) {
       var emptyHeading = (
         element.hasOwnProperty('heading') &&
