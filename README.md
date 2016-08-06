@@ -46,7 +46,7 @@ assert.deepEqual(
 
 Removes both:
 
-```javacript
+```javascript
 assert.deepEqual(
   fixStrings({ content: [ ' A ' ] }),
   { content: [ 'A' ] })
@@ -54,7 +54,7 @@ assert.deepEqual(
 
 From headings:
 
-```javacript
+```javascript
 assert.deepEqual(
   fixStrings({
     content: [
