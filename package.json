@@ -8,12 +8,14 @@
   "devDependencies": {
     "defence-cli": "^1.0.1",
     "replace-require-self": "^1.0.0",
+    "standard": "^8.0.0",
     "unicode-ascii-equivalents": "^0.1.0"
   },
   "scripts": {
     "prepublish": "node prepublish.js > replacements.json",
     "pretest": "npm run prepublish",
-    "test": "defence README.md | replace-require-self | node"
+    "test": "defence README.md | replace-require-self | node",
+    "lint": "standard"
   },
   "dependencies": {
     "commonform-predicate": "^0.4.3"

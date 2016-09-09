@@ -8,48 +8,55 @@ Concatenates contiguous strings:
 var assert = require('assert')
 
 assert.deepEqual(
-  fixStrings({ content: [ 'A', 'B' ] }),
-  { content: [ 'AB' ] })
+  fixStrings({content: ['A', 'B']}),
+  {content: ['AB']}
+)
 ```
 
 Squashes contiguous spaces:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ 'A ', ' B' ] }),
-  { content: [ 'A B' ] })
+  fixStrings({content: ['A ', ' B']}),
+  {content: ['A B']}
+)
 ```
 
 Removes leading whitespace:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ ' A' ] }),
-  { content: [ 'A' ] })
+  fixStrings({content: [' A']}),
+  {content: ['A']}
+)
 
 assert.deepEqual(
-  fixStrings({ content: [ ' ', { definition: 'A' } ] }),
-  { content: [ { definition: 'A' } ] })
+  fixStrings({content: [' ', {definition: 'A'}]}),
+  {content: [{definition: 'A'}]}
+)
 ```
 
 Removes trailing whitespace:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ 'A ' ] }),
-  { content: [ 'A' ] })
+  fixStrings({content: ['A ']}),
+  {content: ['A']}
+)
 
 assert.deepEqual(
-  fixStrings({ content: [ { definition: 'A' }, ' ' ] }),
-  { content: [ { definition: 'A' } ] })
+  fixStrings({content: [{definition: 'A'}, ' ']}),
+  {content: [{definition: 'A'}]}
+)
 ```
 
 Removes both:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ ' A ' ] }),
-  { content: [ 'A' ] })
+  fixStrings({content: [' A ']}),
+  {content: ['A']}
+)
 ```
 
 From headings:
@@ -58,11 +65,21 @@ From headings:
 assert.deepEqual(
   fixStrings({
     content: [
-      { heading: ' A  B ',
-        form: { content: [ 'C' ] } } ] }),
-  { content: [
-      { heading: 'A B',
-        form: { content: [ 'C' ] } } ] })
+      {
+        heading: ' A  B ',
+        form: {content: ['C']}
+      }
+    ]
+  }),
+  {
+    content: [
+      {
+        heading: 'A B',
+        form: {content: ['C']}
+      }
+    ]
+  }
+)
 ```
 
 Remove empty headings:
@@ -71,54 +88,64 @@ Remove empty headings:
 assert.deepEqual(
   fixStrings({
     content: [
-      { heading: '  ',
-        form: { content: [ 'C' ] } } ] }),
-  { content: [
-      { form: { content: [ 'C' ] } } ] })
+      {
+        heading: '  ',
+        form: {content: ['C']}
+      }
+    ]
+  }),
+  {content: [{form: {content: ['C']}}]}
+)
 ```
 
 Replaces common non-ASCII characters with ASCII equivalents:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ 'String “with quotes”.' ] }),
-  { content: [ 'String "with quotes".' ] })
+  fixStrings({content: ['String “with quotes”.']}),
+  {content: ['String "with quotes".']}
+)
 
 assert.deepEqual(
-  fixStrings({ content: [ 'Has — em dash' ] }),
-  { content: [ 'Has --- em dash' ] })
+  fixStrings({content: ['Has — em dash']}),
+  {content: ['Has --- em dash']}
+)
 ```
 
 Removes other non-ASCII characters:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ 'See §10' ] }),
-  { content: [ 'See 10' ] })
+  fixStrings({content: ['See §10']}),
+  {content: ['See 10']}
+)
 ```
 
 Removes space leading a child form:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ 'A ', { form: { content: [ 'B' ] } } ] }),
-  { content: [ 'A', { form: { content: [ 'B' ] } } ] })
+  fixStrings({content: ['A ', {form: {content: ['B']}}]}),
+  {content: ['A', {form: {content: ['B']}}]}
+)
 ```
 
 Removes space following a child form:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ content: [ { form: { content: [ 'B' ] } }, ' A' ] }),
-  { content: [ { form: { content: [ 'B' ] } }, 'A' ] })
+  fixStrings({content: [{form: {content: ['B']}}, ' A']}),
+  {content: [{form: {content: ['B']}}, 'A']}
+)
 ```
 
 Preserves `conspicuous` properties:
 
 ```javascript
 assert.deepEqual(
-  fixStrings({ conspicuous: 'yes', content: [ 'A' ] }),
-  { conspicuous: 'yes', content: [ 'A' ] })
+  fixStrings({conspicuous: 'yes', content: ['A']}),
+  {conspicuous: 'yes', content: ['A']}
+)
 ```
 
 Valid forms pass right through:
@@ -128,10 +155,16 @@ assert.deepEqual(
   fixStrings({
     content: [
       'A',
-      { form: { content: [ 'B' ] } },
-      'C' ] }),
-  { content: [
+      {form: {content: ['B']}},
+      'C'
+    ]
+  }),
+  {
+    content: [
       'A',
-      { form: { content: [ 'B' ] } },
-      'C' ] })
+      {form: {content: ['B']}},
+      'C'
+    ]
+  }
+)
 ```
