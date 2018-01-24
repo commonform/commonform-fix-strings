@@ -148,6 +148,25 @@ assert.deepEqual(
 )
 ```
 
+Cleans up terms and headings:
+
+```javascript
+assert.deepEqual(
+  fixStrings({content: [{use: 'A   B'}]}),
+  {content: [{use: 'A B'}]}
+)
+
+assert.deepEqual(
+  fixStrings({content: [{reference: 'A   B'}]}),
+  {content: [{reference: 'A B'}]}
+)
+
+assert.deepEqual(
+  fixStrings({content: [{heading: 'A   B', form: {content: ['test']}}]}),
+  {content: [{heading: 'A B', form: {content: ['test']}}]}
+)
+```
+
 Valid forms pass right through:
 
 ```javascript

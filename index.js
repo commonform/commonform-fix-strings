@@ -3,8 +3,31 @@ module.exports = commonformFixStrings
 var child = require('commonform-predicate').child
 var removeNonASCII = require('./remove-non-ascii')
 var replaceUnicode = require('./replace-unicode')
+var collapseSpaces = require('./collapse-spaces')
 
 var mutators = [
+  (function () {
+    var KEYS = ['definition', 'use', 'reference', 'heading']
+
+    return function fixNames (form) {
+      form.content.forEach(function (element) {
+        if (typeof element === 'object') {
+          KEYS.forEach(function (key) {
+            if (element.hasOwnProperty(key)) {
+              element[key] = removeNonASCII(
+                replaceUnicode(
+                  collapseSpaces(
+                    element[key].trim()
+                  )
+                )
+              )
+            }
+          })
+        }
+      })
+    }
+  })(),
+
   function fixUnicode (form) {
     form.content.forEach(function (element, index) {
       if (typeof element === 'string') {
