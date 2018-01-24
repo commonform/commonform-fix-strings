@@ -1,5 +1,6 @@
 module.exports = commonformFixStrings
 
+var blank = require('commonform-predicate').blank
 var child = require('commonform-predicate').child
 var removeNonASCII = require('./remove-non-ascii')
 var replaceUnicode = require('./replace-unicode')
@@ -81,6 +82,20 @@ var mutators = [
     .forEach(function (child) {
       child.heading = child.heading.replace(/\s+/g, ' ')
     })
+  },
+
+  function combineContiguousBlanks (form) {
+    form.content = form.content.reduce(function (content, element) {
+      if (
+        blank(element) &&
+        content.length !== 0 &&
+        blank(content[content.length - 1])
+      ) {
+        return content
+      } else {
+        return content.concat(element)
+      }
+    }, [])
   },
 
   function removeLeadingSpace (form) {

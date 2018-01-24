@@ -22,6 +22,15 @@ assert.deepEqual(
 )
 ```
 
+Squashes contiguous blanks:
+
+```javascript
+assert.deepEqual(
+  fixStrings({content: [{blank: ''}, {blank: ''}]}),
+  {content: [{blank: ''}]}
+)
+```
+
 Removes leading whitespace:
 
 ```javascript
