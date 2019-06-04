@@ -168,5 +168,10 @@ function commonformFixStrings (form) {
   mutators.forEach(function (mutator) {
     mutator(form)
   })
+  form.content.forEach(function (element) {
+    if (element.hasOwnProperty('form')) {
+      commonformFixStrings(element.form)
+    }
+  })
   return form
 }
