@@ -1,3 +1,7 @@
+# commonform-fix-strings
+
+correct typical string-related Common Form validation problems
+
 ```javascript
 var fixStrings = require('commonform-fix-strings')
 ```
