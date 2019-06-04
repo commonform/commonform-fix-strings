@@ -10,7 +10,7 @@
     "index.js",
     "remove-non-ascii.js",
     "replace-unicode.js",
-    "replacement.json"
+    "replacements.json"
   ],
   "devDependencies": {
     "defence-cli": "^3.0.1",
