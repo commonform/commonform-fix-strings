@@ -5,6 +5,13 @@
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com/)",
   "repository": "commonform/commonform-fix-strings",
   "license": "BlueOak-1.0.0",
+  "files": [
+    "collapse-spaces.js",
+    "index.js",
+    "remove-non-ascii.js",
+    "replace-unicode.js",
+    "replacement.json"
+  ],
   "devDependencies": {
     "defence-cli": "^3.0.1",
     "replace-require-self": "^1.0.0",
