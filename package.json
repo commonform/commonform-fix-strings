@@ -18,6 +18,6 @@
     "lint": "standard"
   },
   "dependencies": {
-    "commonform-predicate": "^0.4.3"
+    "commonform-predicate": "^3.0.1"
   }
 }
