@@ -6,7 +6,7 @@
   "repository": "commonform/commonform-fix-strings",
   "license": "BlueOak-1.0.0",
   "devDependencies": {
-    "defence-cli": "^1.0.1",
+    "defence-cli": "^3.0.1",
     "replace-require-self": "^1.0.0",
     "standard": "^8.0.0",
     "unicode-ascii-equivalents": "^0.1.0"
