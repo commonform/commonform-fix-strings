@@ -71,17 +71,17 @@ var mutators = [
     form.content = form.content.map(function (element) {
       return (
         typeof element === 'string'
-        ? element.replace(/\s+/g, ' ')
-        : element
+          ? element.replace(/\s+/g, ' ')
+          : element
       )
     })
     form.content
-    .filter(function (element) {
-      return child(element) && ('heading' in element)
-    })
-    .forEach(function (child) {
-      child.heading = child.heading.replace(/\s+/g, ' ')
-    })
+      .filter(function (element) {
+        return child(element) && ('heading' in element)
+      })
+      .forEach(function (child) {
+        child.heading = child.heading.replace(/\s+/g, ' ')
+      })
   },
 
   function combineContiguousBlanks (form) {
@@ -108,12 +108,12 @@ var mutators = [
       }
     }
     form.content
-    .filter(function (element) {
-      return (child(element) && ('heading' in element))
-    })
-    .forEach(function (child) {
-      child.heading = child.heading.replace(/^\s+/, '')
-    })
+      .filter(function (element) {
+        return (child(element) && ('heading' in element))
+      })
+      .forEach(function (child) {
+        child.heading = child.heading.replace(/^\s+/, '')
+      })
   },
 
   function removeTrailingSpace (form) {
@@ -127,12 +127,12 @@ var mutators = [
       }
     }
     form.content
-    .filter(function (element) {
-      return child(element) && ('heading' in element)
-    })
-    .forEach(function (child) {
-      child.heading = child.heading.replace(/\s+$/, '')
-    })
+      .filter(function (element) {
+        return child(element) && ('heading' in element)
+      })
+      .forEach(function (child) {
+        child.heading = child.heading.replace(/\s+$/, '')
+      })
   },
 
   function removeSpaceAroundChildren (form) {
