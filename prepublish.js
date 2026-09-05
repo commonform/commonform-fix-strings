@@ -1,6 +1,8 @@
+import equivalents from 'unicode-ascii-equivalents' with { type: 'json' }
+
 process.stdout.write(
   JSON.stringify(
-    require('unicode-ascii-equivalents')
+    equivalents
       .map(function (replacement) {
         return [ replacement.unicode, replacement.ascii ]
       })

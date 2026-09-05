@@ -1,11 +1,11 @@
-module.exports = replaceUnicode
+import replacements from './replacements.json' with { type: 'json' }
 
-var replacements = require('./replacements').map(function (element) {
+const replacementsPairs = replacements.map(function (element) {
   return [new RegExp(element[0], 'g'), element[1]]
 })
 
-function replaceUnicode (string) {
-  return replacements.reduce(function (string, replacement) {
+export default function replaceUnicode (string) {
+  return replacementsPairs.reduce(function (string, replacement) {
     return string.replace(replacement[0], replacement[1])
   }, string)
 }

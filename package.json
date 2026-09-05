@@ -5,16 +5,16 @@
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com/)",
   "repository": "commonform/commonform-fix-strings",
   "license": "BlueOak-1.0.0",
+  "type": "module",
+  "main": "index.js",
   "files": [
     "collapse-spaces.js",
-    "index.js",
     "remove-non-ascii.js",
     "replace-unicode.js",
     "replacements.json"
   ],
   "devDependencies": {
     "defence-cli": "^3.0.1",
-    "replace-require-self": "^1.0.0",
     "standard": "^12.0.1",
     "standard-markdown": "^5.0.1",
     "unicode-ascii-equivalents": "^0.1.0"
@@ -22,10 +22,10 @@
   "scripts": {
     "prepublish": "node prepublish.js > replacements.json",
     "pretest": "npm run prepublish",
-    "test": "defence README.md | replace-require-self | node",
+    "test": "defence README.md | sed \"s!'commonform-fix-strings'!'./index.js'!\" | node",
     "lint": "standard && standard-markdown"
   },
   "dependencies": {
-    "commonform-predicate": "^3.0.1"
+    "commonform-predicate": "^7.0.1"
   }
 }

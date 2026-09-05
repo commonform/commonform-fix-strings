@@ -3,13 +3,13 @@
 correct typical string-related Common Form validation problems
 
 ```javascript
-var fixStrings = require('commonform-fix-strings')
+import fixStrings from 'commonform-fix-strings'
 ```
 
 Concatenates contiguous strings:
 
 ```javascript
-var assert = require('assert')
+import assert from 'node:assert'
 
 assert.deepStrictEqual(
   fixStrings({ content: ['A', 'B'] }),

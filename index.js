@@ -1,14 +1,11 @@
-module.exports = commonformFixStrings
+import { blank, child } from 'commonform-predicate'
+import removeNonASCII from './remove-non-ascii.js'
+import replaceUnicode from './replace-unicode.js'
+import collapseSpaces from './collapse-spaces.js'
 
-var blank = require('commonform-predicate').blank
-var child = require('commonform-predicate').child
-var removeNonASCII = require('./remove-non-ascii')
-var replaceUnicode = require('./replace-unicode')
-var collapseSpaces = require('./collapse-spaces')
-
-var mutators = [
+const mutators = [
   (function () {
-    var KEYS = ['definition', 'use', 'reference', 'heading']
+    const KEYS = ['definition', 'use', 'reference', 'heading']
 
     return function fixNames (form) {
       form.content.forEach(function (element) {
@@ -39,7 +36,7 @@ var mutators = [
 
   function removeEmptyHeadings (form) {
     form.content.forEach(function (element) {
-      var emptyHeading = (
+      const emptyHeading = (
         element.hasOwnProperty('heading') &&
         /^\s*$/.test(element.heading)
       )
@@ -53,8 +50,8 @@ var mutators = [
     form.content = form.content.reduce(
       function (result, element, index) {
         if (typeof element === 'string' && index > 0) {
-          var lastIndex = result.length - 1
-          var lastElement = result[lastIndex]
+          const lastIndex = result.length - 1
+          const lastElement = result[lastIndex]
           if (typeof lastElement === 'string') {
             result[lastIndex] = lastElement + element
             return result
@@ -99,7 +96,7 @@ var mutators = [
   },
 
   function removeLeadingSpace (form) {
-    var firstElement = form.content[0]
+    const firstElement = form.content[0]
     if (typeof firstElement === 'string') {
       if (/^\s*$/.test(firstElement)) {
         form.content.splice(0, 1)
@@ -117,8 +114,8 @@ var mutators = [
   },
 
   function removeTrailingSpace (form) {
-    var lastIndex = form.content.length - 1
-    var lastElement = form.content[lastIndex]
+    const lastIndex = form.content.length - 1
+    const lastElement = form.content[lastIndex]
     if (typeof lastElement === 'string') {
       if (/^\s*$/.test(lastElement)) {
         form.content.splice((form.content.length - 1), 1)
@@ -142,8 +139,8 @@ var mutators = [
           content.push(element)
           return content
         } else {
-          var lastIndex = content.length - 1
-          var last = content[lastIndex]
+          const lastIndex = content.length - 1
+          const last = content[lastIndex]
           if (
             typeof element === 'string' && last.hasOwnProperty('form')
           ) {
@@ -164,7 +161,7 @@ var mutators = [
   }
 ]
 
-function commonformFixStrings (form) {
+export default function commonformFixStrings (form) {
   mutators.forEach(function (mutator) {
     mutator(form)
   })
